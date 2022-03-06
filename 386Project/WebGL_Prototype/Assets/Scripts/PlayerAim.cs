@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using Cursor = UnityEngine.Cursor;
 
-public class Deneme : MonoBehaviour
+public class PlayerAim : MonoBehaviour
 {
     [SerializeField] private Transform playerPivot;
     [SerializeField] private Transform crossairPivot;
@@ -17,7 +17,7 @@ public class Deneme : MonoBehaviour
 
     void Start()
     {
-        //Cursor.visible = false;
+        Cursor.visible = false;
         mainCamera = Camera.main;
         inputPlane = new Plane(planeNormal, Vector3.zero);
     }
@@ -49,6 +49,11 @@ public class Deneme : MonoBehaviour
         }
     }
 
+    public int GetDirection()
+    {
+        return Mathf.RoundToInt(playerPivot.transform.localScale.x / Mathf.Abs(playerPivot.transform.localScale.x));
+    }
+    
     public float CalculateAngelToGo(float angleInit, Vector3 pos1, Vector3 pos2)
     {
         var lookDir = pos1 - pos2;
