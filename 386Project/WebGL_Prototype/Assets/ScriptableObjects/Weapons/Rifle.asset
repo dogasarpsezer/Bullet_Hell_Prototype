@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84cae5704b1546cfb8166ebeb013b3e5, type: 3}
   m_Name: Rifle
   m_EditorClassIdentifier: 
+  itemName: M4 RIFLE
   ammoUsed: {fileID: 11400000, guid: 04666eebdef255940a8cb3c268604d41, type: 2}
   fireRate: 10
   sprite: {fileID: 1518363075290452430, guid: 5bd5e72862c22944180c2deeb81c2cbf, type: 3}

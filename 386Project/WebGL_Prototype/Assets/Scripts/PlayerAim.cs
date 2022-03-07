@@ -8,7 +8,7 @@ using Cursor = UnityEngine.Cursor;
 public class PlayerAim : MonoBehaviour
 {
     [SerializeField] private Transform playerPivot;
-    [SerializeField] private Transform crossairPivot;
+    public Transform crossairPivot;
     [SerializeField] private Vector2 rotationLimits;
     [SerializeField] private Transform arm;
     [SerializeField] Vector3 planeNormal;

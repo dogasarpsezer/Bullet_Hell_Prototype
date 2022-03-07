@@ -27,4 +27,14 @@
         {
             currentTime = 0f;
         }
+
+        public float NormalizeTime()
+        {
+            return currentTime / time;
+        }
+        
+        public void ForceComplete()
+        {
+            currentTime += time;
+        }
     }
