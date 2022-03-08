@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84cae5704b1546cfb8166ebeb013b3e5, type: 3}
-  m_Name: Rifle
+  m_Name: Pistol
   m_EditorClassIdentifier: 
-  itemName: M4 RIFLE
+  itemName: M1 Pistol
   ammoUsed: {fileID: 11400000, guid: 04666eebdef255940a8cb3c268604d41, type: 2}
-  fireRate: 10
-  sprite: {fileID: 1518363075290452430, guid: 5bd5e72862c22944180c2deeb81c2cbf, type: 3}
-  reloadTime: 3
+  fireRate: 6.25
+  sprite: {fileID: 21300000, guid: 5905acc118ecf4440934aa9faf78139b, type: 3}
+  reloadTime: 1.25
   cameraShake: 5.1
-  cameraShakeTime: 0.1
-  weaponType: 1
+  cameraShakeTime: 0.05
+  weaponType: 0

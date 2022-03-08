@@ -8,10 +8,12 @@ namespace ScriptableObjects
         public Weapon weapon;
         public Transform weaponMuzzle;
         
+        [Header("Recoil Anim")]
         public Transform armTransform;
         public float localAnimPosChange;
         public Vector3 originalLocalPosArm = Vector3.zero;
         
+        [Header("Ammo Variables")]
         public int totalAmmoAside;
         public int currentAmmoInMagazine;
         public int magazineSize;
@@ -22,6 +24,7 @@ namespace ScriptableObjects
         private void Start()
         {
             animTimer = new Timer(1/weapon.fireRate);
+            originalLocalPosArm = armTransform.localPosition;
         }
 
         public void TriggerFireAnimation(int directionOfCharacter)
@@ -33,7 +36,6 @@ namespace ScriptableObjects
             }
             armTransform.localPosition += change;
             animStartPos = armTransform.localPosition;
-            originalLocalPosArm = animStartPos - change;
             isAnimStarted = true;
             animTimer.RestartTimer();
         }
@@ -44,6 +46,7 @@ namespace ScriptableObjects
             animTimer.UpdateTimer(Time.deltaTime);
             if (animTimer.TimerDone())
             {
+                armTransform.localPosition = originalLocalPosArm;
                 isAnimStarted = false;
             }
         }
