@@ -541,3 +541,4 @@ Received Import Request.
 Start importing Assets/Weapons/Materials/ammoNormal.mat using Guid(2aa68a75187f4114989a83879b21233f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8864312f1988e5aa439c1737c6a877f2') in 0.075059 seconds
   Import took 0.079158 seconds .
 
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
