@@ -6,13 +6,13 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    public List<WeaponManager> weaponManagersOnPlayer;
+    public List<WeaponManager> weaponManagersOnPlayer = new List<WeaponManager>();
     private WeaponManager currentWeapon;
 
     private int currentIndex = 0;
     private bool canSwap = true;
 
-    private void Start()
+    private void Awake()
     {
         int count = 0;
         while (count < weaponManagersOnPlayer.Count)

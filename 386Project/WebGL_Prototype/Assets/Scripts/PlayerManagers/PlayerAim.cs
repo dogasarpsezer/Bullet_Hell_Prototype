@@ -46,7 +46,7 @@ public class PlayerAim : MonoBehaviour
             }
 
             var currentWeaponTransform = playerInventory.GetCurrentWeaponManager().transform;
-            currentWeaponTransform.eulerAngles = new Vector3(currentWeaponTransform.eulerAngles.x,currentWeaponTransform.eulerAngles.y,CalculateAngelToGo(angleInit,inputPos,currentWeaponTransform.position));
+            if(playerInventory.GetCurrentWeaponManager())currentWeaponTransform.eulerAngles = new Vector3(currentWeaponTransform.eulerAngles.x,currentWeaponTransform.eulerAngles.y,CalculateAngelToGo(angleInit,inputPos,currentWeaponTransform.position));
         }
     }
 

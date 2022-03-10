@@ -9,14 +9,14 @@ public class PlayerActions : MonoBehaviour
     [SerializeField] private PlayerInventory playerInventory;
     [SerializeField] private PlayerAim playerAim;
     [SerializeField] private CameraShakeComponent cameraShake;
-    private Timer timer;
+    private Timer fireTimer = new Timer(0);
 
     private Timer reloadTimer = new Timer(0);
     private void Start()
     {
         var currentWeapon = playerInventory.GetCurrentWeapon();
-        timer = new Timer(1/currentWeapon.fireRate); //When Activating a weapon (inventory system)
-        timer.ForceComplete();
+        fireTimer = new Timer(1/currentWeapon.fireRate); //When Activating a weapon (inventory system)
+        fireTimer.ForceComplete();
         reloadTimer.ForceComplete();
     }
 
@@ -48,7 +48,7 @@ public class PlayerActions : MonoBehaviour
             
         }
         
-        if(!timer.TimerDone()) timer.UpdateTimer(Time.deltaTime);
+        if(!fireTimer.TimerDone()) fireTimer.UpdateTimer(Time.deltaTime);
 
      }
 
@@ -57,7 +57,7 @@ public class PlayerActions : MonoBehaviour
     {
         if (weaponManager.currentAmmoInMagazine > 0)
         {
-            if (timer.TimerDone())
+            if (fireTimer.TimerDone())
             {
                 weaponManager.TriggerFireAnimation(playerAim.GetDirection());
                 cameraShake.TriggerCameraShake(weaponManager.weapon.cameraShakeTime,
@@ -72,7 +72,7 @@ public class PlayerActions : MonoBehaviour
                     ReloadWeapon();
                 }*/ // Auto reload
 
-                timer.RestartTimer();
+                fireTimer.RestartTimer();
             }
         }
     }
