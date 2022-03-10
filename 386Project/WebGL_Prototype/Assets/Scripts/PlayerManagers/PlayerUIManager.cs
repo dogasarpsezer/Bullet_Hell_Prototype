@@ -8,11 +8,12 @@ public class PlayerUIManager : MonoBehaviour
 {
     [SerializeField] private Text ammoText;
     [SerializeField] private Text itemNameText;
-    [SerializeField] private WeaponManager weaponManager;
+    [SerializeField] private PlayerInventory playerInventory;
 
     void Update()
     {
-        itemNameText.text = weaponManager.weapon.itemName;
-        ammoText.text = weaponManager.currentAmmoInMagazine + " / " + weaponManager.totalAmmoAside;
+        var currentWeaponManager = playerInventory.GetCurrentWeaponManager();
+        itemNameText.text = currentWeaponManager.weapon.itemName;
+        ammoText.text = currentWeaponManager.currentAmmoInMagazine + " / " + currentWeaponManager.totalAmmoAside;
     }
 }

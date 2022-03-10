@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PlayerActions : MonoBehaviour
 {
-    [SerializeField] private WeaponManager weaponManager;
+    [SerializeField] private PlayerInventory playerInventory;
     [SerializeField] private PlayerAim playerAim;
     [SerializeField] private CameraShakeComponent cameraShake;
     private Timer timer;
@@ -14,33 +14,36 @@ public class PlayerActions : MonoBehaviour
     private Timer reloadTimer = new Timer(0);
     private void Start()
     {
-        timer = new Timer(1/weaponManager.weapon.fireRate); //When Activating a weapon (inventory system)
+        var currentWeapon = playerInventory.GetCurrentWeapon();
+        timer = new Timer(1/currentWeapon.fireRate); //When Activating a weapon (inventory system)
         timer.ForceComplete();
         reloadTimer.ForceComplete();
     }
 
     void Update()
     {
-        Debug.DrawLine(weaponManager.weaponMuzzle.position,playerAim.crossairPivot.position,Color.green);
+        var currentWeaponManager = playerInventory.GetCurrentWeaponManager();
+        Debug.DrawLine(currentWeaponManager.weaponMuzzle.position,playerAim.crossairPivot.position,Color.green);
         
-        if(reloadTimer.TimerDone())FireWeaponAction();
-        ReloadWeapon();
+        if(reloadTimer.TimerDone()) FireWeaponAction(ref currentWeaponManager);
+        ReloadWeapon(ref currentWeaponManager);
     }
 
-    public void FireWeaponAction()
+    public void FireWeaponAction(ref WeaponManager currentWeaponManager)
     {
-        if (weaponManager.weapon.weaponType == WeaponType.AUTOMATIC)
+        playerInventory.SetSwap(true);
+        if (currentWeaponManager.weapon.weaponType == WeaponType.AUTOMATIC)
         {
-            if (/*Input.GetMouseButton(0)*/ Input.GetKey(KeyCode.K))
+            if (Input.GetMouseButton(0) /*Input.GetKey(KeyCode.K)*/)
             {
-                FireWeapon();
+                FireWeapon(ref currentWeaponManager);
             }
         }
-        else if (weaponManager.weapon.weaponType == WeaponType.SEMI_AUTO)
+        else if (currentWeaponManager.weapon.weaponType == WeaponType.SEMI_AUTO)
         {
-            if (/*Input.GetMouseButtonDown(0)*/ Input.GetKeyDown(KeyCode.K))
+            if (Input.GetMouseButtonDown(0) /*Input.GetKeyDown(KeyCode.K)*/)
             {
-                FireWeapon();
+                FireWeapon(ref currentWeaponManager);
             }
             
         }
@@ -50,7 +53,7 @@ public class PlayerActions : MonoBehaviour
      }
 
 
-    public void FireWeapon()
+    public void FireWeapon(ref WeaponManager weaponManager)
     {
         if (weaponManager.currentAmmoInMagazine > 0)
         {
@@ -59,9 +62,10 @@ public class PlayerActions : MonoBehaviour
                 weaponManager.TriggerFireAnimation(playerAim.GetDirection());
                 cameraShake.TriggerCameraShake(weaponManager.weapon.cameraShakeTime,
                     weaponManager.weapon.cameraShake);
+                weaponManager.TriggerMuzzleFlash();
                 var newAmmo = Instantiate(weaponManager.weapon.ammoUsed.prefabAmmo,
                     weaponManager.weaponMuzzle.position, Quaternion.identity);
-                newAmmo.transform.right = weaponManager.weaponMuzzle.right * playerAim.GetDirection();
+                newAmmo.transform.right = (playerAim.crossairPivot.position - weaponManager.weaponMuzzle.position).normalized;
                 weaponManager.currentAmmoInMagazine--;
                 /*if (weaponManager.currentAmmoInMagazine == 0 && weaponManager.totalAmmoAside > 0)
                 {
@@ -73,11 +77,12 @@ public class PlayerActions : MonoBehaviour
         }
     }
     
-    public void ReloadWeapon()
+    public void ReloadWeapon(ref WeaponManager weaponManager)
     {
         //Reload Anim
         if (Input.GetKeyDown(KeyCode.R) && weaponManager.currentAmmoInMagazine != weaponManager.magazineSize)
         {
+            playerInventory.SetSwap(false);
             reloadTimer = new Timer(weaponManager.weapon.reloadTime);
             var prevAmmoCount = weaponManager.currentAmmoInMagazine;
             weaponManager.totalAmmoAside += prevAmmoCount;

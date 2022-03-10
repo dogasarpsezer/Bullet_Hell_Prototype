@@ -14,6 +14,11 @@
             currentTime += additionTime;
         }
 
+        public float GetCurrentTime()
+        {
+            return currentTime;
+        }
+        
         public bool TimerDone()
         {
             if (currentTime >= time)

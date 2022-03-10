@@ -10,7 +10,7 @@ public class PlayerAim : MonoBehaviour
     [SerializeField] private Transform playerPivot;
     public Transform crossairPivot;
     [SerializeField] private Vector2 rotationLimits;
-    [SerializeField] private Transform arm;
+    [SerializeField] private PlayerInventory playerInventory;
     [SerializeField] Vector3 planeNormal;
     private Camera mainCamera;
     private Plane inputPlane;
@@ -44,8 +44,9 @@ public class PlayerAim : MonoBehaviour
             {
                 playerPivot.localScale= new Vector3(1,1,1);
             }
-            
-            arm.eulerAngles = new Vector3(arm.eulerAngles.x,arm.eulerAngles.y,CalculateAngelToGo(angleInit,inputPos,arm.position));
+
+            var currentWeaponTransform = playerInventory.GetCurrentWeaponManager().transform;
+            currentWeaponTransform.eulerAngles = new Vector3(currentWeaponTransform.eulerAngles.x,currentWeaponTransform.eulerAngles.y,CalculateAngelToGo(angleInit,inputPos,currentWeaponTransform.position));
         }
     }
 

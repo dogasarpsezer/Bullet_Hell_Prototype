@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: RifleAmmo
   m_EditorClassIdentifier: 
   prefabAmmo: {fileID: 3218254300779698079, guid: c5598abc307e23e4cb6b7659c798de79, type: 3}
-  speed: 10
+  speed: 25
   standardDamage: 10
