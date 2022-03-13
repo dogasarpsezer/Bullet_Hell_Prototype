@@ -8,6 +8,7 @@ using Cursor = UnityEngine.Cursor;
 public class PlayerAim : MonoBehaviour
 {
     [SerializeField] private Transform playerPivot;
+    [SerializeField] private Transform headPivot;
     public Transform crossairPivot;
     [SerializeField] private Vector2 rotationLimits;
     [SerializeField] private PlayerInventory playerInventory;
@@ -47,6 +48,7 @@ public class PlayerAim : MonoBehaviour
 
             var currentWeaponTransform = playerInventory.GetCurrentWeaponManager().transform;
             if(playerInventory.GetCurrentWeaponManager())currentWeaponTransform.eulerAngles = new Vector3(currentWeaponTransform.eulerAngles.x,currentWeaponTransform.eulerAngles.y,CalculateAngelToGo(angleInit,inputPos,currentWeaponTransform.position));
+            headPivot.eulerAngles = new Vector3(headPivot.eulerAngles.x,headPivot.eulerAngles.y,CalculateAngelToGo(angleInit,inputPos,headPivot.position));
         }
     }
 

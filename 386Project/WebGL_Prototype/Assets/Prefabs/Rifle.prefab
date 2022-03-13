@@ -229,9 +229,9 @@ MonoBehaviour:
   armTransform: {fileID: 8450853095464325482}
   localAnimPosChange: -0.1
   originalLocalPosArm: {x: -0.077, y: 0.238, z: 0}
-  totalAmmoAside: 750
-  currentAmmoInMagazine: 120
-  magazineSize: 120
+  totalAmmoAside: 120
+  currentAmmoInMagazine: 30
+  magazineSize: 30
 --- !u!1 &8450853095638949645
 GameObject:
   m_ObjectHideFlags: 0
