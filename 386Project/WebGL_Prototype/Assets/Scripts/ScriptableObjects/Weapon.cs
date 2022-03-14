@@ -18,5 +18,6 @@ public class Weapon : ScriptableObject
     public float cameraShake;
     public float cameraShakeTime;
     public WeaponType weaponType;
+    public float weaponFireRandomness;
 
 }

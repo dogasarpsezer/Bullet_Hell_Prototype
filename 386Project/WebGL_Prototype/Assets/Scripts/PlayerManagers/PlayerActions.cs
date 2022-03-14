@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using ScriptableObjects;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PlayerActions : MonoBehaviour
 {
@@ -65,7 +66,8 @@ public class PlayerActions : MonoBehaviour
                 weaponManager.TriggerMuzzleFlash();
                 var newAmmo = Instantiate(weaponManager.weapon.ammoUsed.prefabAmmo,
                     weaponManager.weaponMuzzle.position, Quaternion.identity);
-                newAmmo.transform.right = (playerAim.crossairPivot.position - weaponManager.weaponMuzzle.position).normalized;
+                var bulletDir = ((playerAim.crossairPivot.position + (new Vector3(Random.Range(-1f,1f),Random.Range(-1f,1f),0) * Mathf.Abs(weaponManager.weapon.weaponFireRandomness))) - weaponManager.weaponMuzzle.position).normalized;
+                newAmmo.transform.right = bulletDir;
                 weaponManager.currentAmmoInMagazine--;
                 /*if (weaponManager.currentAmmoInMagazine == 0 && weaponManager.totalAmmoAside > 0)
                 {
