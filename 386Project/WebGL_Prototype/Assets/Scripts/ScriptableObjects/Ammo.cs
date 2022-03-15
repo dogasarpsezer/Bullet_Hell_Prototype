@@ -8,5 +8,6 @@ namespace ScriptableObjects
         public GameObject prefabAmmo;
         public float speed;
         public float standardDamage;
+        [Range(0,100)]public int hitBlockChance;
     }
 }

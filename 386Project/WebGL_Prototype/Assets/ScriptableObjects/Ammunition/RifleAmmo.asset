@@ -15,3 +15,4 @@ MonoBehaviour:
   prefabAmmo: {fileID: 3218254300779698079, guid: c5598abc307e23e4cb6b7659c798de79, type: 3}
   speed: 20
   standardDamage: 10
+  hitBlockChance: 16

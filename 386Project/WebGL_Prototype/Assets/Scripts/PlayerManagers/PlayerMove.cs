@@ -7,6 +7,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private Animator animator;
     [SerializeField] private Transform playerPivot;
+    [SerializeField] private Rigidbody2D rigidbody2D;
     Vector3 direction = Vector3.zero;
 
     // Update is called once per frame
@@ -35,7 +36,8 @@ public class PlayerMove : MonoBehaviour
         }
 
         var movement = (speed * Time.deltaTime) * direction;
-        transform.position += movement;
+        var newPos = transform.position + movement;
+        rigidbody2D.MovePosition(newPos);
         
         animator.SetFloat("Speed",movement.magnitude);
         animator.SetInteger("Direction", 1);
