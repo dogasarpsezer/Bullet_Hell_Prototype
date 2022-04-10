@@ -58,7 +58,6 @@ MonoBehaviour:
   - 0.49
   - 0.45
   - 0.4
-  particleSystem: {fileID: 0}
 --- !u!1 &4158379745527842014
 GameObject:
   m_ObjectHideFlags: 0

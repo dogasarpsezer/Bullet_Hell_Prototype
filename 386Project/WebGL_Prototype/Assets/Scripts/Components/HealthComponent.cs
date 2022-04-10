@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using GeneralLibrary;
 using UnityEngine;
 
 public class HealthComponent : MonoBehaviour
@@ -28,7 +29,7 @@ public class HealthComponent : MonoBehaviour
     public void EntityHit(ref float damage, Vector3 hitPosition)
     {
         StartHitAnim();
-        CreateHitParticle(hitPosition);
+        ParticleFunctions.CreateParticleEffect(hitParticle,gradient,hitPosition);
         GetDamage(damage);
     }
     
@@ -41,11 +42,11 @@ public class HealthComponent : MonoBehaviour
         }
     }
 
-    private void CreateHitParticle(Vector3 hitPosition)
+    /*private void CreateHitParticle(Vector3 hitPosition)
     {
         var particleObject = Instantiate(hitParticle, hitPosition, Quaternion.identity);
         particleObject.GetComponent<ParticleComponent>().ChangeColorOverLifeTime(gradient);
-    }
+    }*/
 
     private void StartHitAnim()
     {

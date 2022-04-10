@@ -14,7 +14,6 @@ public class AmmoManager : MonoBehaviour
     [SerializeField] private Transform rayEndBottomOffset;
     [SerializeField] private int collisionLevelOfDetail = 1;
     [SerializeField] private float[] rayLengths;
-    [SerializeField] private ParticleSystem particleSystem;
 
     void Update()
     {
@@ -29,12 +28,12 @@ public class AmmoManager : MonoBehaviour
     }
 
 
-    private void OnDrawGizmos()
+    /*private void OnDrawGizmos()
     {
         var startPos = rayStartBottomOffset.position;
         var endPos = rayEndBottomOffset.position;
         DrawDetailedRay(ref collisionLevelOfDetail,ref startPos,ref endPos);
-    }
+    }*/
 
     public void DrawDetailedRay(ref int collisionDetail, ref Vector3 startPos, ref Vector3 endPos)
     {
@@ -48,15 +47,28 @@ public class AmmoManager : MonoBehaviour
             currentPos += dir.normalized * gapDistance;
             Ray ray = new Ray(currentPos, transform.right);
             RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, rayLengths[i]);
-            if(!Application.isPlaying) Gizmos.DrawLine(currentPos,ray.GetPoint(rayLengths[i]));
+            if(!Application.isPlaying) {Gizmos.DrawLine(currentPos,ray.GetPoint(rayLengths[i])); return;}
             if (hit.collider)
             {
+
+                if (hit.collider.CompareTag("Player")) return; // BURAYA LAYER MASK EKLE
                 if (hit.collider.CompareTag("Block") && (Random.Range(0,100) >= ammo.hitBlockChance))
                 {
                     return;
                 }
-                var hitHealtComponent = hit.collider.GetComponent<HealthComponent>();
-                hitHealtComponent.EntityHit(ref ammo.standardDamage,hit.point);
+
+                if (hit.collider.CompareTag("BackgroundBorder"))
+                {
+                    var borderComponent = hit.collider.GetComponent<BorderComponent>();
+                    borderComponent.CreateBorderParticle(hit.point);
+                    Debug.Log("DESTROYER: " + hit.collider.gameObject.name);
+                    Destroy(gameObject);
+                    return;
+                }
+                var hitHealthComponent = hit.collider.GetComponent<HealthComponent>();
+                
+                if(hitHealthComponent) hitHealthComponent.EntityHit(ref ammo.standardDamage,hit.point);
+                Debug.Log("DESTROYER: " + hit.collider.gameObject.name);
                 Destroy(gameObject);
             }
         }

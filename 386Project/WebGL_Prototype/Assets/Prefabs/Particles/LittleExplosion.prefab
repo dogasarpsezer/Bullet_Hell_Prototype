@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 96259276142711021}
   - component: {fileID: 7528811671465285697}
   m_Layer: 0
-  m_Name: ExplosionRock2
+  m_Name: LittleExplosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

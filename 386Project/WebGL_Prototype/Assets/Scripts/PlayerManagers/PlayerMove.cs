@@ -11,7 +11,7 @@ public class PlayerMove : MonoBehaviour
     Vector3 direction = Vector3.zero;
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         direction = Vector3.zero;
 
@@ -35,7 +35,7 @@ public class PlayerMove : MonoBehaviour
             direction += Vector3.down;
         }
 
-        var movement = (speed * Time.deltaTime) * direction;
+        var movement = (speed * Time.fixedDeltaTime) * direction;
         var newPos = transform.position + movement;
         rigidbody2D.MovePosition(newPos);
         

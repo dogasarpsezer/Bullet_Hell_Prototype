@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Block
   - Enemy
+  - BackgroundBorder
   layers:
   - Default
   - TransparentFX
@@ -15,8 +16,8 @@ TagManager:
   - UI
   - Enemy
   - Block
-  - 
-  - 
+  - Player
+  - Bullet
   - 
   - 
   - 

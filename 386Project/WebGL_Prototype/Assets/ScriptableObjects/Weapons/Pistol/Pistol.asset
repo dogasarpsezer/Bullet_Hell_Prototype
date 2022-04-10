@@ -20,4 +20,4 @@ MonoBehaviour:
   cameraShake: 5.1
   cameraShakeTime: 0.05
   weaponType: 0
-  weaponFireRandomness: 0.25
+  weaponFireRandomness: 0.075
